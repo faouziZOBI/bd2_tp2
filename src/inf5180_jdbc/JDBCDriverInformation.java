@@ -19,7 +19,8 @@ public class JDBCDriverInformation {
 	static String url = "jdbc:oracle:thin:@zeta.labunix.uqam.ca:1521:baclab";
 
 	public static Connection con = null;
-        public static java.sql.Statement unEnonceSQL ;
+        public static java.sql.Statement unEnonceSQL;
+        public static java.sql.PreparedStatement pstmt;
 
 	public static Connection getOracleJDBCConnection(){
 
@@ -32,9 +33,9 @@ public class JDBCDriverInformation {
 		}
 
 		try {
-		   con = DriverManager.getConnection(url, userid, password);
+                    con = DriverManager.getConnection(url, userid, password);
 		} catch(SQLException ex) {
-			System.err.println("SQLException: " + ex.getMessage());
+                    System.err.println("SQLException: " + ex.getMessage());
 		}
 
 		return con;
@@ -42,21 +43,20 @@ public class JDBCDriverInformation {
   
 
     public static void main(String[] args) throws Exception {
-	    Connection con = getOracleJDBCConnection();
-	    if(con!= null){
-	       System.out.println("");
-	       DatabaseMetaData meta = con.getMetaData();
-	       System.out.println("Driver Name : " + meta.getDriverName());
-	       System.out.println("Driver Version :  " +meta.getDriverVersion());
+        Connection con = getOracleJDBCConnection();
+        if(con!= null){
+            System.out.println("");
+	    DatabaseMetaData meta = con.getMetaData();
+	    System.out.println("Driver Name : " + meta.getDriverName());
+	    System.out.println("Driver Version :  " +meta.getDriverVersion());
 
-           PreparerLivraison livraison = new PreparerLivraison ("Preparer Livraison") ;
-           livraison.setVisible (true) ;
+            PreparerLivraison livraison = new PreparerLivraison ("Preparer Livraison") ;
+            livraison.setVisible (true) ;
           
-        
-	    }else{
-		    System.out.println("Could not Get Connection");
-	    }
-	}
+        }else{
+            System.out.println("Could not Get Connection");
+        }
+    } // main
 
 
 }
